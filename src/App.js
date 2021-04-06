@@ -2,12 +2,17 @@ import './App.css';
 import {useState, useEffect} from 'react';
 import { Card, Button } from '@material-ui/core';
 import FormatQuoteIcon from '@material-ui/icons/FormatQuote';
+import TwitterIcon from '@material-ui/icons/Twitter';
+import COLOR_ARRAY from './color'
 
 function App() {
     const [responseData, setResponseData] = useState({});
     const [errors, setErrors] = useState(null);
+    const [bgColor, setBgColor] = useState('#991AFF');
     
     async function fetchData() {
+        let randomInteger = Math.floor(COLOR_ARRAY.length * Math.random())
+        setBgColor(COLOR_ARRAY[randomInteger])
         const res = await fetch("https://api.quotable.io/random");
         res
           .json()
@@ -16,46 +21,26 @@ function App() {
       }
 
     useEffect(() => {
-        fetchData();
+      fetchData();
     },[])
 
-    console.log(responseData.quote);
-    console.log(responseData.quote);
     console.log(errors);
     
   return (
-      <div className='body' style={styles.container}>
-        <Card id="quote-box" style={{backgroundColor: 'white'}}>
-            <p id="text" style={{fontSize: '2rem', color:'aqua'}}><FormatQuoteIcon />{responseData.content}</p>
-            <p id="author" style={{justifyContent: 'right', fontSize: '1rem', color: 'aqua'}}>-{responseData.author}</p>
-            <div >
-            <a id="tweet-quote" href="twitter.com/intent/tweet"></a>
-            <Button id="new-quote" style={{color: 'aqua'}} onClick={() => fetchData()}>
+      <div className='body' style={{backgroundColor: bgColor}}>
+        <Card id="quote-box">
+            <p id="text" style={{color: bgColor}}><FormatQuoteIcon />{responseData.content}</p>
+            <p id="author" style={{color: bgColor}}>-{responseData.author}</p>
+            <div className='button-twitter'>
+              <a id="tweet-quote" href={encodeURI(`http://twitter.com/intent/tweet?text=${responseData.content} -${responseData.author}`)}><TwitterIcon style={{backgroundColor: bgColor, color: 'white'}} /></a>
+              <Button id="new-quote" style={{backgroundColor: bgColor}} onClick={() => fetchData()}>
                 New quote
-            </Button>
+              </Button>
             </div>
         </Card>
       </div>
   );
 }
-const styles = {
-    container:{
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100vh',
-    backgroundColor: 'aquamarin',
-    },
-    quoteBox:{
-    position: 'fixed',
-    flexDirection: 'column',
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    color: 'purple',
-    fontSize: '20px',
-    border: '2px solid purple',
-    flexWrap: 'wrap'
-    }
-  }
+
 
 export default App;

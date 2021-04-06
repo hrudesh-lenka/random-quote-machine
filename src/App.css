@@ -1,3 +1,31 @@
 .body{
-    background-color: aquamarine;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
   }
+
+  #text{
+    text-align: center;
+  }
+
+  #quote-box{
+    width: 35vw;
+    padding: 4% 4%;
+  }
+
+  #author{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1%;
+  }
+
+  #new-quote{
+    color:white;
+  }
+
+.button-twitter{
+  display: flex;
+  flex-direction: row; 
+  justify-content: space-between;
+}
