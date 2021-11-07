@@ -1,7 +1,7 @@
 {
   "name": "random-quote-machine",
   "version": "0.1.0",
-  "homepage": "http://hrudesh.me/random-quote-machine",
+  "homepage": "https://hrudesh.in/random-quote-machine",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.3",
